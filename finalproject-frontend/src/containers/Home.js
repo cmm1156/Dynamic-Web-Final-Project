@@ -4,7 +4,11 @@ import axios from "axios";
 // axios is used to query (get/retrieve/fetch) data from an API
 
 function Home() {
-  const [sampleAPIData, setSampleAPIData] = useState([]);
+  const [myAPIData, setMyAPIData] = useState([]);
+  // ## CHECK THIS
+  // const [hikingProjectAPIData, setHikingProjectAPIData] = useState(
+  //   setHikingProjectAPIData
+  // );
 
   // NOTE: localhost:4000 or server equivalent must be running (npm start) in order to retrive the data
   // Later this will be changed to Heroku deploy address
@@ -18,20 +22,34 @@ function Home() {
        - We use axios to retrieve that data from our server (localhost:4000) that we just served to our server (localhost:4000) */
       .then(function (response) {
         if (response.data) {
-          setSampleAPIData(response.data);
+          setMyAPIData(response.data);
         }
       })
       .catch(function (error) {
         console.log("error", error);
       });
   }, []);
+  // console.log({ myAPIData });
 
-  console.log({ sampleAPIData });
+  // ## CHECK THIS
+  // const hikingKey = process.env.REACT_APP_HIKING_APIKEY;
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${hikingKey}`
+  //     )
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log("error", error);
+  //     });
+  // }, [hikingProjectAPIData]);
 
   return (
     <div>
       <h1>Hi</h1>
-      {sampleAPIData.map((item, i) => (
+      {myAPIData.map((item, i) => (
         <div key={i}>
           <p>Name: {item.name}</p>
           <p>Role: {item.role}</p>

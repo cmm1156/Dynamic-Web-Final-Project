@@ -5,23 +5,15 @@ const router = express.Router();
 // DATA IS SERVED TO THE BACKEND USING Express
 // go to localhost:4000 to see 'sampleHikingJSON'
 
-const sampleHikingJSON = [
+const hikingJSON = [
   {
-    name: "Chris",
-    role: "student",
-    dog: "artemis",
-  },
-  {
-    name: "trail",
-    role: "number of miles",
-    dog: "hello",
-    // trail: "trail name",
-    // miles: "number of miles",
-    // difficulty: "trail difficulty",
+    trailName: "",
+    traillocation: "",
+    maxAlt: "",
   },
 ];
 
-router.get("/", (req, res) => res.send(sampleHikingJSON));
+router.get("/", (req, res) => res.send(hikingJSON));
 // Inside of this arrow function, we can do anything we along as somethign is returned at the end
 
 module.exports = router;

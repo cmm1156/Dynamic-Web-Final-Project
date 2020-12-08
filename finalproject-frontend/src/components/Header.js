@@ -1,5 +1,4 @@
 import React from "react";
-// import LogoutFunction from "../App.js";
 
 function Header({ loggedIn, LogoutFunction }) {
   return (
@@ -13,7 +12,7 @@ function Header({ loggedIn, LogoutFunction }) {
         ) : (
           <>
             <a href="/login">Login</a>
-            <a href="/create-account">Create Account</a>
+            <a href="/create-account">Create Acccount</a>
           </>
         )}
       </nav>

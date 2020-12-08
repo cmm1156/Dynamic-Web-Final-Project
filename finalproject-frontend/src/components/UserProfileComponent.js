@@ -1,17 +1,14 @@
 import React from "react";
 
-function UserProfileComponent({ userInformation }) {
+function UserProfileComponent({ userAuthInfo }) {
   return (
     <div>
       <p>
-        <strong>UID:</strong> {userInformation.uid}
+        <strong>UID:</strong> {userAuthInfo.uid}
       </p>
       <p>
-        <strong>Email:</strong> {userInformation.email}
+        <strong>Email:</strong> {userAuthInfo.email}
       </p>
-      {/* <p>
-        <strong>Display Name:</strong> {userInformation.displayName}
-      </p> */}
     </div>
   );
 }
