@@ -11,19 +11,21 @@ function RecipeCard({ recipeData }) {
       </h3>
       <h3>Ingredients:</h3>
       <ul>
-        {recipeData.ingredients.map((ingredient, i) => (
-          <li key={i}>
-            {ingredient.name} -- {ingredient.amount}
-          </li>
-        ))}
+        {recipeData.ingredients &&
+          recipeData.ingredients.map((ingredient, i) => (
+            <li key={i}>
+              {ingredient.name} -- {ingredient.amount}
+            </li>
+          ))}
       </ul>
       <h3>Steps:</h3>
       <ul>
-        {recipeData.steps.map((step, i) => (
-          <li key={i}>
-            {step.stepNumber} -- {step.stepInstruction}
-          </li>
-        ))}
+        {recipeData.steps &&
+          recipeData.steps.map((step, i) => (
+            <li key={i}>
+              {step.stepNumber} -- {step.stepInstruction}
+            </li>
+          ))}
       </ul>
     </div>
   );

@@ -90,6 +90,28 @@ const recipes = db.collection("recipes");
 // router.get("/", (req, res) => res.send(sampleRecipeJSON)); // this will get at the index route
 // Inside of this arrow function, we can do anything we along as somethign is returned at the end
 
+router.get("/recipes/:id", (req, res) => {
+  const recipesArray = [];
+
+  // Get ID
+  const queryId = req.params.id;
+  // Figure out how to refine our search to the recipeAuthorId
+
+  recipes
+    .where("recipeAuthorId", "==", queryId)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        recipesArray.push(doc.data());
+      });
+      return res.send(recipesArray);
+    })
+    .catch(function (error) {
+      console.warn("Error:", error);
+      return res.send(error);
+    });
+});
+
 router.get("/all-recipes", (req, res) => {
   const recipesArray = [];
   recipes

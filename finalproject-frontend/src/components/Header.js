@@ -1,12 +1,14 @@
 import React from "react";
 
-function Header({ loggedIn, LogoutFunction }) {
+function Header({ loggedIn, LogoutFunction, userAuthInfo }) {
   return (
     <>
       <header className="Header">
         {/* <h1 className="websiteName">The Rest Area</h1> */}
         <nav className="Header__nav">
-          {loggedIn && <a href="/">Profile</a>}
+          {loggedIn && <a href="/">Home</a>}
+          {loggedIn && <a href={`/profile/${userAuthInfo.uid}`>Profile</a>}
+          {loggedIn && <a href="/create-recipe">Create Recipe</a>}
           {!loggedIn && <a href="/create-account">Create Account</a>}
           {!loggedIn && <a href="/login">Login</a>}
           {loggedIn && (

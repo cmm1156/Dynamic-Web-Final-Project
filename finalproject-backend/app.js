@@ -31,9 +31,10 @@ const recipes = db.collection("recipes");
 // DEFINE ROUTES to import
 // finds the code in these files
 const indexRoute = require("./routes/index.js");
-const postRoute = require("./routes/post.js");
-const createRoute = require("./routes/createPost.js");
-const submitRoute = require("./routes/createPost.js");
+// const postRoute = require("./routes/post.js");
+// const createRoute = require("./routes/createPost.js");
+// const submitRoute = require("./routes/createPost.js");
+const createRoute = require("./routes/createRecipe.js");
 
 // ### Add Firebase here like in Exercise-Four
 
@@ -50,9 +51,9 @@ app.use(function (req, res, next) {
 // ### Add more routes here for getting and submitting... like exercise 4
 // ENABLES ROUTES IN Express
 app.use("/", indexRoute);
-app.use("/post", postRoute); // with this url localhost:4000/post, the code in post.js will show and run
+// app.use("/post", postRoute); // with this url localhost:4000/post, the code in post.js will show and run
 app.use("/create", createRoute);
-app.use("create/submit", submitRoute);
+// app.use("create/submit", submitRoute);
 
 // app.listen() is an Express method
 // USED TO SHOW THAT THE SERVER IS WORKING

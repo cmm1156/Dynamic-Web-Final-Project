@@ -13,8 +13,8 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
-import NewContainer from "./containers/NewContainer";
-import CreateRecipe from "./container/CreateRecipe";
+// import NewContainer from "./containers/NewContainer";
+import CreateRecipe from "./containers/CreateRecipe";
 
 // Components
 import Header from "./components/Header";
@@ -154,7 +154,11 @@ function App() {
   // UNLIKE Express, Routes can be create here
   return (
     <div className="App">
-      <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
+      <Header
+        loggedIn={loggedIn}
+        LogoutFunction={LogoutFunction}
+        userAuthInfo={userAuthInfo}
+      />
       {/* <Home /> */}
       {/* <NewContainer /> */}
       <Router>
@@ -176,23 +180,27 @@ function App() {
             <Redirect to="/" />
           )}
         </Route>
-        <Route exact path="/">
-          {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
-          {!loggedIn ? (
-            <Redirect to="/login" />
-          ) : (
-            <UserProfile userAuthInfo={userAuthInfo} />
-            /* userInformation is a variable of the user object */
-          )}
-        </Route>
-        <Route exact path="/home-page">
-          <Home />
-        </Route>
         <Route exact path="/create-recipe">
           {!loggedIn ? (
             <Redirect to="/login" />
           ) : (
             <CreateRecipe userAuthInfo={userAuthInfo} />
+          )}
+        </Route>
+        <Route exact path="/profile/:id">
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <UserProfile userAuthInfo={userAuthInfo} />
+          )}
+        </Route>
+        <Route exact path="/">
+          {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <Home userAuthInfo={userAuthInfo} />
+            /* userInformation is a variable of the user object */
           )}
         </Route>
       </Router>

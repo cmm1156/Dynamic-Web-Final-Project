@@ -13,7 +13,7 @@ function CreateRecipe({ userAuthInfo }) {
 
     const recipeName = e.currentTarget.recipeName.value;
     const recipeAuthor = e.currentTarget.recipeAuthor.value; // these keys must be same as Firestore
-    const recipeAuthorId = userAuthInfo.uid.value;
+    const recipeAuthorId = userAuthInfo.uid;
     // code to come...
     // recipe author
     // recipe author id
@@ -21,6 +21,7 @@ function CreateRecipe({ userAuthInfo }) {
     // Steps: Array ???
     // ingredients : Array of values???
 
+    // create request to the backend
     axios
       .get(
         `https://vast-tor-77687.herokuapp.com/create?recipeName=${recipeName}&recipeAuthor=${recipeAuthor}&recipeAuthorId=${recipeAuthorId}`
@@ -30,7 +31,7 @@ function CreateRecipe({ userAuthInfo }) {
         history.push("/");
       })
       .catch(function (error) {
-        console.log({ ERROR: error });
+        console.warn("ERROR_CREATE_POST:", error);
       });
 
     console.log(e.currentTarget);
@@ -45,10 +46,14 @@ function CreateRecipe({ userAuthInfo }) {
     <div>
       <h1>Create Recipe</h1>
       <form onSubmit={(e) => submitRecipe(e)}>
-        <label>Recipe Name</label>
-        <input type="text" name="recipeName" placeholder="Title" />
-        <label>Recipe Author Name</label>
-        <input type="text" name="recipeAuthor" placeholder="Author" />
+        <label>
+          Recipe Name
+          <input type="text" name="recipeName" placeholder="Title" />
+        </label>
+        <label>
+          Recipe Author Name
+          <input type="text" name="recipeAuthor" placeholder="Author" />
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>
