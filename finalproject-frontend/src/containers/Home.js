@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RecipeCard from "../components/RecipeCard";
+import PostCard from "../components/PostCard";
 
 // axios is used to query (get/retrieve/fetch) data from an API
 
 function Home() {
+  const [myAPIData, setMyAPIData] = useState([]);
   // set default states of the current data array, currently nothing because empty []
-  const [recipeAPIData, setRecipeAPIData] = useState([]);
-  // ## CHECK THIS
-  // const [hikingProjectAPIData, setHikingProjectAPIData] = useState(
-  //   setHikingProjectAPIData
-  // );
-
   // NOTE: localhost:4000 or server equivalent must be running (npm start) in order to retrive the data
   // Later this will be changed to Heroku deploy address
   // http://localhost:4000
 
-  // this is retreiving data from my localhost:4000
+  // this is retreiving data from my localhost:4000 or Heroku
   useEffect(() => {
     axios
-      .get(`https://vast-tor-77687.herokuapp.com/`) // use herokuapp.com/theroute to specify where the data is coming from
+      .get(`https://vast-tor-77687.herokuapp.com/all-posts`) // use herokuapp.com/theroute to specify where the data is coming from
       // .get(`https://vast-tor-77687.herokuapp.com/`) // in Excerise-Two, this line contained .get(`https://openweather.com/data/? ...`),
       /*instead of this the openweather API url, we are using our localhost:4000 ( the backend )
       We are using our backend as an API
@@ -28,7 +23,7 @@ function Home() {
        - We use axios to retrieve that data from our server (localhost:4000) that we just served to our server (localhost:4000) */
       .then(function (response) {
         if (response.data) {
-          setRecipeAPIData(response.data);
+          setMyAPIData(response.data);
         }
       })
       .catch(function (error) {
@@ -36,31 +31,12 @@ function Home() {
       });
   }, []);
 
-  // console.log({ myAPIData });
-
-  // ## CHECK THIS
-  // const hikingKey = process.env.REACT_APP_HIKING_APIKEY;
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${hikingKey}`
-  //     )
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log("error", error);
-  //     });
-  // }, [hikingProjectAPIData]);
-
-  console.log({ recipeAPIData });
-
   return (
     <>
       <div>
-        <h1>All Recipes</h1>
-        {recipeAPIData.map((recipe, i) => (
-          <RecipeCard recipeData={recipe} key={i} />
+        <h1>Recent Posts</h1>
+        {myAPIData.map((item, i) => (
+          <PostCard postData={item} key={i} />
         ))}
         {/* {recipeAPIData.map((recipe, i) => (
           <RecipeCard recipeData={recipe} key={i} />

@@ -1,35 +1,32 @@
-import React, { useState } from "react";
-import UserProfileComponent from "../components/UserProfileComponent";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RecipeCard from "../components/RecipeCard";
+import axios from "axios";
+import PostCard from "../components/PostCard";
 
-function UserProfile({ userAuthInfo }) {
-  const [UserProfileData, setUserProfileData] = useState({});
-  const [userRecipeData, setUserRecipeData] = useState([]);
+function UserProfile() {
+  const [userPostData, setUserPostData] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     axios
-      .get(`https://vast-tor-77687.herokuapp.com/recipes/${id}/`)
+      .get(`https://vast-tor-77687.herokuapp.com/posts/${id}/`)
       .then(function (response) {
         if (response.data) {
-          setUserRecipeData(response.data);
+          setUserPostData(response.data);
         }
       })
       .catch(function (error) {
         console.warn("error", error);
       });
   }, []);
-  console.log({ userRecipeData });
 
   return (
     <div>
       <h1>User Profile</h1>
-      <h2>{"name"} Recipes:</h2>
-      {userRecipeData.map(recipe, i) => (
-        <RecipeCard recipeData={recipe} key={i} />
-      )}
+      <h2>Your posts:</h2>
+      {userPostData.map((item, i) => (
+        <RecipeCard recipeData={item} key={i} />
+      ))}
     </div>
   );
 }

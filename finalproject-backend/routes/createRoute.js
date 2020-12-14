@@ -4,12 +4,12 @@ const router = express.Router();
 // Require Firebase
 const firebase = require("firebase");
 const db = firebase.firestore();
-const recipes = db.collection("recipes");
+const posts = db.collection("posts");
 
 router.get("/", (req, res) => {
-  const queryParams = re.query;
+  const queryParams = req.query;
 
-  recipes
+  posts
     .doc()
     .set(queryParams)
     .then(function (doc) {

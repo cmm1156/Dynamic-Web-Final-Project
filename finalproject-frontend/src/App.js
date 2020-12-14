@@ -12,9 +12,8 @@ import "./App.css";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
+import CreatePost from "./containers/CreatePost";
 import UserProfile from "./containers/UserProfile";
-// import NewContainer from "./containers/NewContainer";
-import CreateRecipe from "./containers/CreateRecipe";
 
 // Components
 import Header from "./components/Header";
@@ -34,8 +33,8 @@ const firebaseConfig = {
 };
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false); // set to logged out by default
-  const [loading, setLoading] = useState(false); // set loading default to false; // the laoding state prevents the flickering on page changes
+  const [loggedIn, setLoggedIn] = useState(true); // set to logged out by default
+  const [loading, setLoading] = useState(true); // set loading default to false; // the laoding state prevents the flickering on page changes
   // when loading is true, the function returns null, therefore doesn't show loading
   const [userAuthInfo, setUserAuthInfo] = useState({}); // by default user info is empty, so no user info shows
 
@@ -46,20 +45,20 @@ function App() {
       // Initializes Firebase
       firebase.initializeApp(firebaseConfig);
     }
-    console.log("Firebase Initialized");
   }, [firebaseConfig]); // dependency array is firebaseConfig, everytime the config changes, this use effect will run
 
   // This use effect runs once because the dependency array is empty
   // this useEffect is used to update the data shown on the UserProfile page
   useEffect(() => {
     // .onAuthStateChanged(callback) Adds an observer for changes to the user's sign-in state
-    firebase.auth().onAuthStateChanged(function (userAuth) {
-      // console.log({ userAuth });
-      if (userAuth) {
+    firebase.auth().onAuthStateChanged(function (user) {
+      // console.log({ user });
+      if (user) {
         // User is logged in
+        setUserAuthInfo(user); // user is type object // is an filled object {}
         setLoggedIn(true);
-        setUserAuthInfo(userAuth); // userAuth type object // is an filled object {}
       } else {
+        setUserAuthInfo({});
         setLoggedIn(false); // if no user info, logged out
       }
       setLoading(false); // loading flickering will not show
@@ -84,11 +83,10 @@ function App() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(function (response) {
-        console.log("LOGIN RESPONSE", response);
         setLoggedIn(true);
       })
       .catch(function (error) {
-        console.log("LOGIN ERROR", error);
+        console.warn("LOGIN ERROR", error);
       });
   }
 
@@ -107,7 +105,7 @@ function App() {
         setUserAuthInfo({}); // If user logs out, I want to clear the user information with the empty {} object
       })
       .catch(function (error) {
-        console.log("LOGOUT ERROR", error);
+        console.warn("LOGOUT ERROR", error);
       });
   }
 
@@ -125,24 +123,17 @@ function App() {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function (response) {
-        console.log("VALID ACCOUNT CREATED FOR:", email, response);
         setLoggedIn(true);
       })
       .catch(function (error) {
-        console.log("ACCOUNT CREATION FAILED", error);
+        console.warn("ACCOUNT CREATION FAILED", error);
       });
   }
 
   /**
    *
-   *
-   *
-   *
-   *
-   *
-   *
-   *
-   *
+ 
+
    */
 
   // COMPONENTS are like an image or div on a page
@@ -155,12 +146,10 @@ function App() {
   return (
     <div className="App">
       <Header
-        loggedIn={loggedIn}
         LogoutFunction={LogoutFunction}
+        isLoggedIn={loggedIn}
         userAuthInfo={userAuthInfo}
       />
-      {/* <Home /> */}
-      {/* <NewContainer /> */}
       <Router>
         <Route exact path="/login">
           {/* If someone is logged in, do not take them to login page - take them to User Profile
@@ -180,19 +169,15 @@ function App() {
             <Redirect to="/" />
           )}
         </Route>
-        <Route exact path="/create-recipe">
+        <Route exact path="/create-post">
           {!loggedIn ? (
             <Redirect to="/login" />
           ) : (
-            <CreateRecipe userAuthInfo={userAuthInfo} />
+            <CreatePost userAuthInfo={userAuthInfo} />
           )}
         </Route>
         <Route exact path="/profile/:id">
-          {!loggedIn ? (
-            <Redirect to="/login" />
-          ) : (
-            <UserProfile userAuthInfo={userAuthInfo} />
-          )}
+          {!loggedIn ? <Redirect to="/login" /> : <UserProfile />}
         </Route>
         <Route exact path="/">
           {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
@@ -200,7 +185,6 @@ function App() {
             <Redirect to="/login" />
           ) : (
             <Home userAuthInfo={userAuthInfo} />
-            /* userInformation is a variable of the user object */
           )}
         </Route>
       </Router>

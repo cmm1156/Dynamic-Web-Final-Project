@@ -6,105 +6,31 @@ const router = express.Router(); //   THIS LINE !!!
 
 const firebase = require("firebase");
 const db = firebase.firestore();
-const recipes = db.collection("recipes");
+const posts = db.collection("posts"); // this is referencing the collection made in Firestore GUI titled 'recipes'
 
-// router.get("/recipes/:id", (req, res) => {
-//   const recipesArray = [];
-//   recipes
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         recipesArray.push(doc.data());
-//       });
-//       return res.send(recipesArray);
-//     })
-//     .catch(function (error) {
-//       console.log("Error", error);
-//       return res.send(error);
-//     });
-// });
+// index.js  is a backedn route that serves data contained at the base "/" of the API
+// in index.js, two branches have been created:
+// 1. "/all-recipes" -- this contains all the posts
+// 2. "/recipes/:id" -- this contains all the posts from a specific user
 
-// const firebase = require("firebase");
-// const db = firebase.firestore();
-// const posts = db.collection("posts");
-
-// IS THIS LINE !!!
-// router.get("/", (req, res) => {
-//   const posts = [];
-
-//   posts
-//     .get()
-//     .then((querySnapshot) => {
-//       // loop through query snapshot and push into array (JSON)
-//       querySnapshot.forEach((doc) => {
-//         postsArrays.push(doc.data());
-//       });
-//       // return array
-//       return res.send(postsArray);
-//     })
-//     .catch(function (e) {
-//       console.warn("error", e);
-//       return res.send(error);
-//     });
-// });
-
-// index.js  IS THE BACKEND THAT SERVES THE DATA
 // DATA IS SERVED TO THE BACKEND USING Express
 // go to localhost:4000 to see 'sampleHikingJSON'
 
-// const myJSON = [
-//   {
-//     trailName: "hiking trail",
-//     trailLocation: "the location",
-//     maxAlt: "altitude",
-//   },
-//   {
-//     trailName: "name 2",
-//     trailLocation: "location 2",
-//     maxAlt: "alt 2",
-//   },
-// ];
-
-// const sampleRecipeJSON = [
-//   {
-//     recipeId: "01",
-//     recipeame: "Salad",
-//     recipeAuthor: "Chris",
-//     recipeAuthorId: "01",
-//     ingredient: [
-//       {
-//         name: "lettuce",
-//         amount: "2 cups",
-//       },
-//     ],
-//     steps: [
-//       {
-//         stepNumber: 1,
-//         stepInstruction: "Toss lettuce",
-//       },
-//     ],
-//   },
-// ];
-
-// routes to index
-// router.get("/", (req, res) => res.send(sampleRecipeJSON)); // this will get at the index route
-// Inside of this arrow function, we can do anything we along as somethign is returned at the end
-
-router.get("/recipes/:id", (req, res) => {
-  const recipesArray = [];
+router.get("/posts/:id", (req, res) => {
+  const postsArray = [];
 
   // Get ID
   const queryId = req.params.id;
   // Figure out how to refine our search to the recipeAuthorId
 
-  recipes
-    .where("recipeAuthorId", "==", queryId)
+  posts
+    .where("postAuthorId", "==", queryId)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        recipesArray.push(doc.data());
+        postsArray.push(doc.data());
       });
-      return res.send(recipesArray);
+      return res.send(postsArray);
     })
     .catch(function (error) {
       console.warn("Error:", error);
@@ -112,15 +38,16 @@ router.get("/recipes/:id", (req, res) => {
     });
 });
 
-router.get("/all-recipes", (req, res) => {
-  const recipesArray = [];
-  recipes
+router.get("/all-posts", (req, res) => {
+  const postsArray = [];
+
+  posts
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        recipesArray.push(doc.data());
+        postsArray.push(doc.data());
       });
-      return res.send(recipesArray);
+      return res.send(postsArray);
     })
     .catch(function (error) {
       console.warn("Error:", error);
@@ -130,5 +57,4 @@ router.get("/all-recipes", (req, res) => {
 
 // Sends the HTTP response.
 // The body parameter can be a Buffer object, a String, an object, Boolean, or an Array. For example:
-
 module.exports = router;

@@ -1,40 +1,21 @@
 import React from "react";
 
-function Header({ loggedIn, LogoutFunction, userAuthInfo }) {
+function Header({ LogoutFunction, isLoggedIn, userAuthInfo }) {
   return (
-    <>
-      <header className="Header">
-        {/* <h1 className="websiteName">The Rest Area</h1> */}
-        <nav className="Header__nav">
-          {loggedIn && <a href="/">Home</a>}
-          {loggedIn && <a href={`/profile/${userAuthInfo.uid}`>Profile</a>}
-          {loggedIn && <a href="/create-recipe">Create Recipe</a>}
-          {!loggedIn && <a href="/create-account">Create Account</a>}
-          {!loggedIn && <a href="/login">Login</a>}
-          {loggedIn && (
-            <a href="" onClick={() => LogoutFunction()}>
-              Logout
-            </a>
-          )}
-
-          {/* {loggedIn && <a href="/create-recipe">Create Post</a>}
-          {loggedIn && <a href="/new-container">New Container</a>} */}
-
-          {/* <a href="/home-page">Home</a>
-          {loggedIn ? (
-            <>
-              <a href="/">User Profile</a>
-              <a onClick={() => LogoutFunction()}>Logout</a>
-            </>
-          ) : (
-            <>
-              <a href="/login">Login</a>
-              <a href="/create-account">Create Acccount</a>
-            </>
-          )} */}
-        </nav>
-      </header>
-    </>
+    <header className="Header">
+      <nav className="Header__nav">
+        {isLoggedIn && <a href="/">Home</a>}
+        {isLoggedIn && <a href={`/profile/${userAuthInfo.uid}`}>Profile</a>}
+        {isLoggedIn && <a href="/create-post">Create Post</a>}
+        {!isLoggedIn && <a href="/create-account">Create Account</a>}
+        {!isLoggedIn && <a href="/login">Login</a>}
+        {isLoggedIn && (
+          <a href="" onClick={() => LogoutFunction()}>
+            Logout
+          </a>
+        )}
+      </nav>
+    </header>
   );
 }
 
