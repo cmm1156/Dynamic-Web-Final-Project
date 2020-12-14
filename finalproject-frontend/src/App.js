@@ -13,6 +13,8 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import UserProfile from "./containers/UserProfile";
+import NewContainer from "./containers/NewContainer";
+import CreateRecipe from "./container/CreateRecipe";
 
 // Components
 import Header from "./components/Header";
@@ -24,6 +26,7 @@ import Header from "./components/Header";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "final-project-25657.firebaseapp.com",
+  databaseURL: "https://final-project-25657-default-rtdb.firebaseio.com",
   projectId: "final-project-25657",
   storageBucket: "final-project-25657.appspot.com",
   messagingSenderId: "836470554574",
@@ -148,10 +151,12 @@ function App() {
 
   if (loading) return null;
 
+  // UNLIKE Express, Routes can be create here
   return (
     <div className="App">
       <Header loggedIn={loggedIn} LogoutFunction={LogoutFunction} />
       {/* <Home /> */}
+      {/* <NewContainer /> */}
       <Router>
         <Route exact path="/login">
           {/* If someone is logged in, do not take them to login page - take them to User Profile
@@ -178,6 +183,16 @@ function App() {
           ) : (
             <UserProfile userAuthInfo={userAuthInfo} />
             /* userInformation is a variable of the user object */
+          )}
+        </Route>
+        <Route exact path="/home-page">
+          <Home />
+        </Route>
+        <Route exact path="/create-recipe">
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <CreateRecipe userAuthInfo={userAuthInfo} />
           )}
         </Route>
       </Router>

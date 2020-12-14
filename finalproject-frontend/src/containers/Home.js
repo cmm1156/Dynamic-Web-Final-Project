@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import RecipeCard from "../components/RecipeCard";
 
 // axios is used to query (get/retrieve/fetch) data from an API
 
 function Home() {
-  const [myAPIData, setMyAPIData] = useState([]);
+  // set default states of the current data array, currently nothing because empty []
+  const [recipeAPIData, setRecipeAPIData] = useState([]);
   // ## CHECK THIS
   // const [hikingProjectAPIData, setHikingProjectAPIData] = useState(
   //   setHikingProjectAPIData
@@ -12,9 +14,13 @@ function Home() {
 
   // NOTE: localhost:4000 or server equivalent must be running (npm start) in order to retrive the data
   // Later this will be changed to Heroku deploy address
+  // http://localhost:4000
+
+  // this is retreiving data from my localhost:4000
   useEffect(() => {
     axios
-      .get(`http://localhost:4000`) // in Excerise-Two, this line contained .get(`https://openweather.com/data/? ...`),
+      .get(`https://vast-tor-77687.herokuapp.com/`) // use herokuapp.com/theroute to specify where the data is coming from
+      // .get(`https://vast-tor-77687.herokuapp.com/`) // in Excerise-Two, this line contained .get(`https://openweather.com/data/? ...`),
       /*instead of this the openweather API url, we are using our localhost:4000 ( the backend )
       We are using our backend as an API
       How this works:
@@ -22,13 +28,14 @@ function Home() {
        - We use axios to retrieve that data from our server (localhost:4000) that we just served to our server (localhost:4000) */
       .then(function (response) {
         if (response.data) {
-          setMyAPIData(response.data);
+          setRecipeAPIData(response.data);
         }
       })
       .catch(function (error) {
-        console.log("error", error);
+        console.warn("error", error);
       });
   }, []);
+
   // console.log({ myAPIData });
 
   // ## CHECK THIS
@@ -46,17 +53,25 @@ function Home() {
   //     });
   // }, [hikingProjectAPIData]);
 
+  console.log({ recipeAPIData });
+
   return (
-    <div>
-      <h1>Hi</h1>
-      {myAPIData.map((item, i) => (
-        <div key={i}>
-          <p>Name: {item.name}</p>
-          <p>Role: {item.role}</p>
-          <p>Dog: {item.dog}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <div>
+        <h1>All Recipes</h1>
+        {recipeAPIData.map((recipe, i) => (
+          <RecipeCard recipeData={recipe} key={i} />
+        ))}
+        {/* {recipeAPIData.map((recipe, i) => (
+          <RecipeCard recipeData={recipe} key={i} />
+          <div key={i}>
+            <p>Name: {item.trailName}</p>
+            <p>Role: {item.trailLocation}</p>
+            <p>Dog: {item.maxAlt}</p>
+          </div>
+        ))} */}
+      </div>
+    </>
   );
 }
 

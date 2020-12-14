@@ -6,6 +6,14 @@
 .Header {
   max-width: 1040px;
   margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.Header h1 {
+  justify-content: flex-start;
 }
 
 .Header nav {
@@ -21,6 +29,13 @@
   display: block;
   margin: 10px;
   text-decoration: underline;
+}
+
+.RecipeCard {
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 15px;
+  padding: 15px;
 }
 
 .SignupForm {
