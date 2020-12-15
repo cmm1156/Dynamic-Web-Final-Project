@@ -1,44 +1,233 @@
 .App {
-  max-width: 1040px;
+  /* max-width: 1040px; */
   margin: 0 auto;
+  padding: 0px;
+}
+
+.mainContainer {
+  margin: 0 auto;
+  max-width: 1040px;
+}
+
+.CreatePost {
+  margin: 75px;
+  margin-top: 20px;
+  padding: 20px;
+  border: solid 2px black;
+}
+
+.CreatePost label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.CreatePost input {
+  font-size: 15px;
+  height: 24px;
+}
+
+.CreateName input,
+.CreateDisplayName input {
+  margin-left: 10px;
+}
+
+.CreateName {
+  margin-bottom: 100px;
+}
+
+.CreateDisplayName {
+}
+
+.CreateImage {
+  display: flex;
+  flex-direction: column;
+}
+.CreateImage input {
+  width: 200px;
+  display: block;
+}
+
+.CreateTrailInfo {
+  display: flex;
+  flex-direction: column;
+}
+.CreateTrailInfo input {
+  width: 300px;
+}
+
+.CreatePost textarea {
+  font-family: "Arial";
+  width: 500px;
+  height: 200px;
+}
+
+.CreatePost button {
+  background-color: green;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  /* font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  border: none;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  font-size: 20px;
+}
+.CreatePost button:hover {
+  background-color: lightgreen;
+}
+
+.FullPost {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.FullPostInfo {
+  justify-content: flex-start;
+}
+
+.CreateReport {
+  padding: 25px;
+  padding-top: 0px;
+  margin-top: 50px;
+  justify-content: flex-end;
+  border: solid 4px green;
+  border-radius: 10px;
+}
+
+.CreateReport label {
+  font-weight: bold;
+}
+
+.CreateReportInfo h1 {
+  text-align: left;
+}
+
+.CreateReportInfo {
+  text-align: left;
+}
+
+.CreateReport textarea {
+  font-family: "Arial";
+  width: 200px;
+  height: 75px;
 }
 
 .Header {
+  width: 100%;
+  background-color: green;
+}
+
+.Header div {
   max-width: 1040px;
   margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  background-color: green;
 }
 
 .Header h1 {
   justify-content: flex-start;
+  color: white;
+}
+
+.Header a {
+  text-decoration: none;
 }
 
 .Header nav {
   display: flex;
   justify-content: flex-end;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  padding: 15px;
+  padding-top: 25px;
+  /* padding-right: inherit; */
 }
 
 .Header nav a {
   color: black;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   display: block;
   margin: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.Header a:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+.LinkDiv a {
+  font-size: 20px;
+  text-decoration: none;
+  color: blue;
+  padding-left: 2px;
+}
+.LinkDiv a:hover {
   text-decoration: underline;
 }
 
 .PostCard {
-  border: 1px solid black;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  border: solid 2px grey;
   margin: 15px;
   padding: 15px;
 }
 
+.PostCardGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+}
+
+.PostCardImageDiv {
+  grid-column: 1;
+  grid-row: 1;
+}
+.PostCard img {
+  height: 200px;
+}
+
+.PostCardInfoDiv {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.PostCardInfoDiv a {
+  color: green;
+  text-decoration: none;
+}
+
+/* .PostCardBorder {
+  display: flex;
+  align-items: center;
+  border-top: solid 2px grey;
+  width: 50vw;
+} */
+
+/* .Signup {
+  display: flex;
+  justify-content: center;
+} */
+
 .SignupForm {
+  width: 350px;
   display: flex;
   flex-direction: column;
 }
@@ -48,4 +237,35 @@
   margin-bottom: 30px;
   max-width: 400px;
   width: 100%;
+}
+
+.SignupForm button,
+.CreateReport button {
+  display: flex;
+  justify-content: center;
+  /* width: 100px; */
+  align-self: center;
+
+  background-color: green;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  /* font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  border: none;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  font-size: 20px;
+}
+.SignupForm button:hover,
+.CreateReport button:hover {
+  background-color: lightgreen;
+}
+
+.SignupForm label {
+  font-weight: bold;
 }

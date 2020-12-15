@@ -7,27 +7,29 @@ import { Link } from "react-router-dom";
 function PostCard({ postData }) {
   return (
     <div className="PostCard">
-      <div>
-        <img src={postData.image} alt="trailImage" />
-      </div>
+      <div className="PostCardGrid">
+        <div className="PostCardImageDiv">
+          <img src={`https://via.placeholder.com/2000x1200`} alt="trailImage" />
+        </div>
 
-      <div>
-        <h2>{postData.postName}</h2>
-        <h3>
-          <a href={`/profile/${postData.postAuthorId}`}>
-            By {postData.postAuthor}
-          </a>
-        </h3>
-      </div>
+        <div className="PostCardInfoDiv">
+          <h2>{postData.postName}</h2>
+          <h3>
+            <a href={`/profile/${postData.postAuthorId}`}>
+              By {postData.postAuthor}
+            </a>
+          </h3>
 
-      <div>
-        <ul>
-          <li>{postData.location}</li>
-          <li>{postData.numMiles}</li>
-          <li>{postData.maxAlt}</li>
-        </ul>
+          <ul>
+            <li>{postData.location}</li>
+            <li>{postData.numMiles}</li>
+            <li>{postData.maxAlt}</li>
+          </ul>
+        </div>
       </div>
-      <Link to={`/full-post/${postData.postName}`}>Read More</Link>
+      <div className="LinkDiv">
+        <Link to={`/full-post/${postData.postName}`}>Read More</Link>
+      </div>
     </div>
   );
 }

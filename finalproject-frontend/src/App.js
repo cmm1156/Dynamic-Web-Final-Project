@@ -24,14 +24,23 @@ import Header from "./components/Header";
 
 // My Firebase Configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-  authDomain: "final-project-25657.firebaseapp.com",
-  databaseURL: "https://final-project-25657-default-rtdb.firebaseio.com",
-  projectId: "final-project-25657",
-  storageBucket: "final-project-25657.appspot.com",
-  messagingSenderId: "836470554574",
-  appId: "1:836470554574:web:a79dca759c75194f9bf59f",
+  apiKey: "AIzaSyD3kjvaLwzr41hA7YU-yht1gQDiIwMdacA",
+  authDomain: "final-project-2-55bab.firebaseapp.com",
+  databaseURL: "https://final-project-2-55bab-default-rtdb.firebaseio.com",
+  projectId: "final-project-2-55bab",
+  storageBucket: "final-project-2-55bab.appspot.com",
+  messagingSenderId: "396105694122",
+  appId: "1:396105694122:web:d32bbc171f1816841c89d3",
 };
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+//   authDomain: "final-project-25657.firebaseapp.com",
+//   databaseURL: "https://final-project-25657-default-rtdb.firebaseio.com",
+//   projectId: "final-project-25657",
+//   storageBucket: "final-project-25657.appspot.com",
+//   messagingSenderId: "836470554574",
+//   appId: "1:836470554574:web:a79dca759c75194f9bf59f",
+// };
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true); // set to logged out by default
@@ -152,53 +161,55 @@ function App() {
         isLoggedIn={loggedIn}
         userAuthInfo={userAuthInfo}
       />
-      <Router>
-        <Route exact path="/login">
-          {/* If someone is logged in, do not take them to login page - take them to User Profile
+      <div className="mainContainer">
+        <Router>
+          <Route exact path="/login">
+            {/* If someone is logged in, do not take them to login page - take them to User Profile
           this is an if/else statement. If not logged in, the login container will show on the page,
           if already logged in, the website will redirect the user to the main page */}
-          {!loggedIn ? (
-            <Login LoginFunction={LoginFunction} />
-          ) : (
-            <Redirect to="/" />
-          )}
-        </Route>
-        <Route exact path="/create-account">
-          {/* If someone is logged in, do not take them to create account page - take them to User Profile */}
-          {!loggedIn ? (
-            <CreateAccount CreateAccountFunction={CreateAccountFunction} />
-          ) : (
-            <Redirect to="/" />
-          )}
-        </Route>
-        <Route exact path="/create-post">
-          {!loggedIn ? (
-            <Redirect to="/login" />
-          ) : (
-            <CreatePost userAuthInfo={userAuthInfo} />
-          )}
-        </Route>
-        <Route exact path="/profile/:id">
-          {!loggedIn ? <Redirect to="/login" /> : <UserProfile />}
-        </Route>
+            {!loggedIn ? (
+              <Login LoginFunction={LoginFunction} />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+          <Route exact path="/create-account">
+            {/* If someone is logged in, do not take them to create account page - take them to User Profile */}
+            {!loggedIn ? (
+              <CreateAccount CreateAccountFunction={CreateAccountFunction} />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+          <Route exact path="/create-post">
+            {!loggedIn ? (
+              <Redirect to="/login" />
+            ) : (
+              <CreatePost userAuthInfo={userAuthInfo} />
+            )}
+          </Route>
+          <Route exact path="/profile/:id">
+            {!loggedIn ? <Redirect to="/login" /> : <UserProfile />}
+          </Route>
 
-        <Route exact path="/full-post/:id">
-          {!loggedIn ? (
-            <Redirect to="/login" />
-          ) : (
-            <FullPost userAuthInfo={userAuthInfo} />
-          )}
-        </Route>
+          <Route exact path="/full-post/:id">
+            {!loggedIn ? (
+              <Redirect to="/login" />
+            ) : (
+              <FullPost userAuthInfo={userAuthInfo} />
+            )}
+          </Route>
 
-        <Route exact path="/">
-          {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
-          {!loggedIn ? (
-            <Redirect to="/login" />
-          ) : (
-            <Home userAuthInfo={userAuthInfo} />
-          )}
-        </Route>
-      </Router>
+          <Route exact path="/">
+            {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
+            {!loggedIn ? (
+              <Redirect to="/login" />
+            ) : (
+              <Home userAuthInfo={userAuthInfo} />
+            )}
+          </Route>
+        </Router>
+      </div>
     </div>
   );
 }

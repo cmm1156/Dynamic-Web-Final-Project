@@ -5,15 +5,15 @@ import React from "react";
 // this element waits for the the trigger in onSubmit which then runs the function to log the user in
 function LoginForm({ LoginFunction }) {
   return (
-    <div>
-      <form className="SignUpForm" onSubmit={(e) => LoginFunction(e)}>
+    <div className="Signup">
+      <form className="SignupForm" onSubmit={(e) => LoginFunction(e)}>
         <label htmlFor="loginEmail">Email</label>
         <input type="email" name="loginEmail" />
         <br />
         <label htmlFor="loginPassword">Password</label>
         <input type="password" name="loginPassword" />
 
-        <button>Submit</button>
+        <button>Login</button>
       </form>
     </div>
   );

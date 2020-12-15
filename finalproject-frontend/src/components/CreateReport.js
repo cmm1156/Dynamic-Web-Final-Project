@@ -27,17 +27,23 @@ function CreateReport() {
 
   if (submitState === false) {
     return (
-      <div>
+      <div className="CreateReportInfo">
         <h1>Create Report</h1>
         <form onSubmit={(e) => submitReport(e)}>
           <label>
+            Title report
+            <br />
             <input type="text" name="reportTitle" placeholder="Title" />
-            <input
+            <br />
+            Issue
+            <br />
+            <textarea
               type="text"
               name="reportText"
               placeholder="Write your issue"
             />
           </label>
+          <br />
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -46,17 +52,7 @@ function CreateReport() {
     return (
       <div>
         <h1>Thank you</h1>
-        <form onSubmit={(e) => submitReport(e)}>
-          <label>
-            <input type="text" name="reportTitle" placeholder="Title" />
-            <input
-              type="text"
-              name="reportText"
-              placeholder="Write your issue"
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+        <a onClick={setSubmitState(false)}>Submit Another Report</a>
       </div>
     );
   }

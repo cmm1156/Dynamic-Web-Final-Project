@@ -23,30 +23,30 @@ function FullPost({ userAuthInfo }) {
     });
 
   return (
-    <>
-      <div>
+    <div className="FullPost">
+      <div className="FullPostInfo">
         <img src={userPostData.image} alt="trailImage" />
+
+        <div>
+          <h1>{userPostData.postName}</h1>
+          <h2>{userPostData.postAuthor}</h2>
+
+          <ul>
+            <li>{userPostData.location}</li>
+            <li>{userPostData.numMiles}</li>
+            <li>{userPostData.maxAlt}</li>
+          </ul>
+        </div>
+
+        <div>
+          <p>{userPostData.review}</p>
+        </div>
       </div>
 
-      <div>
-        <h1>{userPostData.postName}</h1>
-        <h2>{userPostData.postAuthor}</h2>
-
-        <ul>
-          <li>{userPostData.location}</li>
-          <li>{userPostData.numMiles}</li>
-          <li>{userPostData.maxAlt}</li>
-        </ul>
-      </div>
-
-      <div>
-        <p>{userPostData.review}</p>
-      </div>
-
-      <div>
+      <div className="CreateReport">
         <CreateReport userAuthInfo={userAuthInfo} />
       </div>
-    </>
+    </div>
   );
 }
 

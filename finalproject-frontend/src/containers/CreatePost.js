@@ -16,7 +16,7 @@ function CreatePost({ userAuthInfo }) {
     const postName = e.currentTarget.postName.value;
     const postAuthor = e.currentTarget.postAuthor.value; // these keys must be same as Firestore
     const postAuthorId = userAuthInfo.uid; // current user logged in
-    const image = e.currentTarget.image.url;
+    const image = e.currentTarget.image.value;
     const location = e.currentTarget.location.value;
     const numMiles = e.currentTarget.numMiles.value;
     const maxAlt = e.currentTarget.maxAlt.value;
@@ -43,36 +43,42 @@ function CreatePost({ userAuthInfo }) {
 
   // THIS DISPLAYS THE DATA THAT WAS JUST ADDED TO Firestore
   return (
-    <div>
+    <div className="CreatePost">
       <h1>Create Post</h1>
       <form onSubmit={(e) => submitPost(e)}>
-        <label>
+        <label className="CreateName">
           Post Name
           <input type="text" name="postName" placeholder="Title" />
         </label>
         <br />
-        <label>
+        <label className="CreateDisplayName">
           Display Name
           <input type="text" name="postAuthor" placeholder="Author" />
         </label>
-        <br />
 
-        <label>
+        <label className="CreateImage">
           Add image
-          <input type="file" name="image" placeholder="image" />
+          {/* <input
+            type="file"
+            enctype="multipart/form-data"
+            name="image"
+            placeholder="image"
+          /> */}
+          <input type="text" name="image" placeholder="imageUrl" />
         </label>
-        <br />
-        <label>
+        <label className="CreateTrailInfo">
           Trail info
           <input type="text" name="location" placeholder="location" />
           <input type="text" name="numMiles" placeholder="miles" />
           <input type="text" name="maxAlt" placeholder="altitude" />
         </label>
-        <br />
+
         <label>
-          Review
-          <input type="text" name="review" placeholder="review" />
+          Write a Review
+          <br />
+          <textarea name="review" placeholder="Write a review"></textarea>
         </label>
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>
