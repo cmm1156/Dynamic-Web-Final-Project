@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function CreateReport() {
-  const [submitState, setSubmitState] = useState(false);
+  const [submitState, setSubmitState] = useState(null);
 
   function submitReport(e) {
     e.preventDefault();
@@ -15,17 +15,18 @@ function CreateReport() {
         // `https://vast-tor-77687.herokuapp.com/create-report?reportTitle=${reportTitle}&reportName=${reportName}&`
       )
       .then(function (response) {
-        // history.push("/");
+        setSubmitState(true);
       })
       .catch(function (error) {
         console.warn("ERROR_CREATE_REPORT:", error);
       });
 
-    alert("report submitted");
-    setSubmitState(true);
+    alert("Report Submitted");
   }
 
-  if (submitState === false) {
+  console.log(submitState);
+
+  if (submitState === false || submitState === null) {
     return (
       <div className="CreateReportInfo">
         <h1>Create Report</h1>
@@ -50,9 +51,9 @@ function CreateReport() {
     );
   } else {
     return (
-      <div>
+      <div className="CreateReportInfo">
         <h1>Thank you</h1>
-        <a onClick={setSubmitState(false)}>Submit Another Report</a>
+        {/* <a onClick={setSubmitState(false)}>Submit Another Report</a> */}
       </div>
     );
   }

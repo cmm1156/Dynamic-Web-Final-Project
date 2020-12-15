@@ -10,17 +10,19 @@ function FullPost({ userAuthInfo }) {
   const { id } = useParams();
   const idFromTitle = id.replace(/\s+/g, "-").toLowerCase();
 
-  axios
-    .get(
-      `http://localhost:4000/post/${idFromTitle}`
-      // `https://vast-tor-77687.herokuapp.com/post/${idFromTitle}`
-    )
-    .then(function (response) {
-      setUserPostData(response.data);
-    })
-    .catch(function (error) {
-      console.warn("ERROR:", error);
-    });
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:4000/post/${idFromTitle}`
+        // `https://vast-tor-77687.herokuapp.com/post/${idFromTitle}`
+      )
+      .then(function (response) {
+        setUserPostData(response.data);
+      })
+      .catch(function (error) {
+        console.warn("ERROR:", error);
+      });
+  }, []);
 
   return (
     <div className="FullPost">

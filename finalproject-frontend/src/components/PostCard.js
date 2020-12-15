@@ -22,8 +22,8 @@ function PostCard({ postData }) {
 
           <ul>
             <li>{postData.location}</li>
-            <li>{postData.numMiles}</li>
-            <li>{postData.maxAlt}</li>
+            <li>Length: {postData.numMiles} mi</li>
+            <li>Elevation gain: {postData.maxAlt} ft</li>
           </ul>
         </div>
       </div>
