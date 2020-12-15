@@ -3,6 +3,7 @@ import React from "react";
 function Header({ LogoutFunction, isLoggedIn, userAuthInfo }) {
   return (
     <header className="Header">
+      <h1>Hiking Website</h1>
       <nav className="Header__nav">
         {isLoggedIn && <a href="/">Home</a>}
         {isLoggedIn && <a href={`/profile/${userAuthInfo.uid}`}>Profile</a>}

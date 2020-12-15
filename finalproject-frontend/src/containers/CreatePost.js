@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function CreatePost({ userAuthInfo }) {
   const history = useHistory();
+  // const [postId, setPostId] = useState("");
+
+  // let [newId, setNewId] = useState(0);
 
   // THIS FUNCTION WILL ADD DATA TO Firestore
   function submitPost(e) {
@@ -12,14 +15,19 @@ function CreatePost({ userAuthInfo }) {
 
     const postName = e.currentTarget.postName.value;
     const postAuthor = e.currentTarget.postAuthor.value; // these keys must be same as Firestore
-    const postAuthorId = userAuthInfo.uid;
-
+    const postAuthorId = userAuthInfo.uid; // current user logged in
+    const image = e.currentTarget.image.url;
+    const location = e.currentTarget.location.value;
+    const numMiles = e.currentTarget.numMiles.value;
+    const maxAlt = e.currentTarget.maxAlt.value;
+    const review = e.currentTarget.review.value;
     // code to come...
 
     // create request to the backend
     axios
       .get(
-        `https://vast-tor-77687.herokuapp.com/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&`
+        `http://localhost:4000/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${image}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
+        // `https://vast-tor-77687.herokuapp.com/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${image}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
       )
       .then(function (response) {
         history.push("/");
@@ -44,8 +52,26 @@ function CreatePost({ userAuthInfo }) {
         </label>
         <br />
         <label>
-          Post Author Name
+          Display Name
           <input type="text" name="postAuthor" placeholder="Author" />
+        </label>
+        <br />
+
+        <label>
+          Add image
+          <input type="file" name="image" placeholder="image" />
+        </label>
+        <br />
+        <label>
+          Trail info
+          <input type="text" name="location" placeholder="location" />
+          <input type="text" name="numMiles" placeholder="miles" />
+          <input type="text" name="maxAlt" placeholder="altitude" />
+        </label>
+        <br />
+        <label>
+          Review
+          <input type="text" name="review" placeholder="review" />
         </label>
         <button type="submit">Submit</button>
       </form>

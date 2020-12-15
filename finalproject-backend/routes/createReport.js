@@ -4,13 +4,17 @@ const router = express.Router();
 // Require Firebase
 const firebase = require("firebase");
 const db = firebase.firestore();
-const posts = db.collection("posts");
+const reports = db.collection("reports");
 
 router.get("/", (req, res) => {
+  // gets information at base "/" of '/create-report/...'
   const queryParams = req.query;
+  const idFromTitle = queryParams.reportTitle
+    .replace(/\s+/g, "-")
+    .toLowerCase();
 
-  posts
-    .doc()
+  reports
+    .doc(idFromTitle)
     .set(queryParams)
     .then(function (doc) {
       res.send("success");

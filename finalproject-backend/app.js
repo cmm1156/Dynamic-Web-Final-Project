@@ -27,7 +27,12 @@ firebase.initializeApp(firebaseConfig);
 // DEFINE ROUTES to import
 // finds the code in these files
 const indexRoute = require("./routes/index.js");
-const createRoute = require("./routes/createRoute.js");
+const createPost = require("./routes/createPost.js");
+const submitRoute = require("./routes/createPost.js");
+const postRoute = require("./routes/post.js");
+
+const createReport = require("./routes/createReport.js");
+const submitReport = require("./routes/createReport.js");
 
 // ### Add Firebase here like in Exercise-Four
 
@@ -44,7 +49,11 @@ app.use(function (req, res, next) {
 // ### Add more routes here for getting and submitting... like exercise 4
 // ENABLES ROUTES IN Express
 app.use("/", indexRoute);
-app.use("/create", createRoute); // with this url localhost:4000/post, the code in post.js will show and run
+app.use("/create", createPost); // with this url localhost:4000/post, the code in post.js will show and run
+app.use("/submit", submitRoute);
+app.use("/post", postRoute);
+app.use("/create-report", createReport); // use '/create-report' as the route to compile all submitted reports
+app.use("/submit-report", submitReport);
 
 // app.listen() is an Express method
 // USED TO SHOW THAT THE SERVER IS WORKING

@@ -9,7 +9,7 @@ function LoginForm({ LoginFunction }) {
       <form className="SignUpForm" onSubmit={(e) => LoginFunction(e)}>
         <label htmlFor="loginEmail">Email</label>
         <input type="email" name="loginEmail" />
-
+        <br />
         <label htmlFor="loginPassword">Password</label>
         <input type="password" name="loginPassword" />
 

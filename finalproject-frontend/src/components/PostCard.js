@@ -1,30 +1,33 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
+// postData is just a parameter name, it is NOT a defined variable
+// therefore ANYTHING can be postData, SEE UserProfile.js
 function PostCard({ postData }) {
   return (
-    <div className="RecipeCard">
-      <h2>{postData.postName}</h2>
-      <h3>
-        <a href={`/user/${postData.postAuthorId}`}>By {postData.postAuthor}</a>
-      </h3>
-      <h3>Info:</h3>
-      <ul>
-        {postData.info &&
-          postData.info.map((infoItem, i) => (
-            <li key={i}>
-              {infoItem.name} -- {infoItem.amount}
-            </li>
-          ))}
-      </ul>
-      <h3>Steps:</h3>
-      <ul>
-        {postData.steps &&
-          postData.steps.map((step, i) => (
-            <li key={i}>
-              {step.stepNumber} -- {step.stepInstruction}
-            </li>
-          ))}
-      </ul>
+    <div className="PostCard">
+      <div>
+        <img src={postData.image} alt="trailImage" />
+      </div>
+
+      <div>
+        <h2>{postData.postName}</h2>
+        <h3>
+          <a href={`/profile/${postData.postAuthorId}`}>
+            By {postData.postAuthor}
+          </a>
+        </h3>
+      </div>
+
+      <div>
+        <ul>
+          <li>{postData.location}</li>
+          <li>{postData.numMiles}</li>
+          <li>{postData.maxAlt}</li>
+        </ul>
+      </div>
+      <Link to={`/full-post/${postData.postName}`}>Read More</Link>
     </div>
   );
 }

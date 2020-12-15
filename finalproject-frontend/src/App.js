@@ -14,6 +14,7 @@ import Login from "./containers/Login";
 import CreateAccount from "./containers/CreateAccount";
 import CreatePost from "./containers/CreatePost";
 import UserProfile from "./containers/UserProfile";
+import FullPost from "./containers/FullPost";
 
 // Components
 import Header from "./components/Header";
@@ -55,6 +56,7 @@ function App() {
       // console.log({ user });
       if (user) {
         // User is logged in
+        console.log(user);
         setUserAuthInfo(user); // user is type object // is an filled object {}
         setLoggedIn(true);
       } else {
@@ -179,6 +181,15 @@ function App() {
         <Route exact path="/profile/:id">
           {!loggedIn ? <Redirect to="/login" /> : <UserProfile />}
         </Route>
+
+        <Route exact path="/full-post/:id">
+          {!loggedIn ? (
+            <Redirect to="/login" />
+          ) : (
+            <FullPost userAuthInfo={userAuthInfo} />
+          )}
+        </Route>
+
         <Route exact path="/">
           {/* if someone is not logged in, do not take them to User Profile page - take them to Login Page */}
           {!loggedIn ? (
