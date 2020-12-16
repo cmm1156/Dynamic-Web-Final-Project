@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { storage } from "../firebase";
 
+// Work Cited: https://www.youtube.com/watch?v=8r1Pb6Ja90o
+
 function UploadImage() {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
@@ -25,7 +27,7 @@ function UploadImage() {
         // setProgress(progress);
       },
       (error) => {
-        console.log(error);
+        console.warn(error);
       },
       () => {
         storage
@@ -33,12 +35,10 @@ function UploadImage() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            console.log("url", url);
             // setUrl(url);
             let splitUrl = url.split("&");
             let correctUrl = splitUrl[0].replace("images/", "images%2F");
             setUrl(correctUrl);
-            console.log(correctUrl);
             setToken(splitUrl[1]);
           });
       }

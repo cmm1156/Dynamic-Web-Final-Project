@@ -16,9 +16,7 @@ function CreatePost({ userAuthInfo }) {
     const postAuthorId = userAuthInfo.uid; // current user logged in
 
     const imageUrl = document.getElementById("imageUrl").innerHTML;
-    console.log(imageUrl);
     const token = document.getElementById("token").innerHTML;
-    console.log(token);
 
     const location = e.currentTarget.location.value;
     const numMiles = e.currentTarget.numMiles.value;
@@ -29,8 +27,7 @@ function CreatePost({ userAuthInfo }) {
     // create request to the backend
     axios
       .get(
-        `http://localhost:4000/create?imageUrl=${imageUrl}&token=${token}&postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
-        // `https://vast-tor-77687.herokuapp.com/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${theImage}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
+        `https://vast-tor-77687.herokuapp.com/create?imageUrl=${imageUrl}&token=${token}&postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
       )
       .then(function (response) {
         history.push("/");

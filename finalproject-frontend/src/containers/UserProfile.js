@@ -11,11 +11,9 @@ function UserProfile() {
   useEffect(() => {
     // this is getting all the posts that contain the user's UID, and
     axios // and displaying them in a PostCard format
-      // .get(`https://vast-tor-77687.herokuapp.com/posts/${id}/`)
-      .get(`http://localhost:4000/posts/${id}`)
+      .get(`https://vast-tor-77687.herokuapp.com/posts/${id}/`)
       .then(function (response) {
         if (response.data) {
-          console.log(response.data);
           setUserPostData(response.data);
         }
       })

@@ -12,10 +12,7 @@ function FullPost({ userAuthInfo }) {
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:4000/post/${idFromTitle}`
-        // `https://vast-tor-77687.herokuapp.com/post/${idFromTitle}`
-      )
+      .get(`https://vast-tor-77687.herokuapp.com/post/${idFromTitle}`)
       .then(function (response) {
         setUserPostData(response.data);
       })
@@ -26,8 +23,28 @@ function FullPost({ userAuthInfo }) {
 
   return (
     <div className="FullPost">
+      <div
+        className="BackgroundDiv"
+        style={{
+          backgroundImage: `url(
+            ${
+              userPostData.imageUrl === undefined ? (
+                <img src="#" alt="errorLoading" />
+              ) : (
+                <img
+                  src={`${userPostData.imageUrl.replace(
+                    "images/",
+                    "images%2F"
+                  )}&${userPostData.token}`}
+                  alt="trailImage"
+                />
+              )
+            }
+          )`,
+        }}
+      ></div>
       <div className="FullPostInfo">
-        <img src={userPostData.imageUrl} alt="trailImage" />
+        {/* <img src={userPostData.imageUrl} alt="trailImage" /> */}
 
         <div>
           <h1>{userPostData.postName}</h1>

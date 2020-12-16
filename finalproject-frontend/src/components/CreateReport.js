@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import UploadImage from "./UploadImage";
 
 function CreateReport() {
   const [submitState, setSubmitState] = useState(null);
@@ -8,11 +9,12 @@ function CreateReport() {
     e.preventDefault();
     const reportTitle = e.currentTarget.reportTitle.value;
     const reportText = e.currentTarget.reportText.value;
+    const imageUrl = document.getElementById("imageUrl").innerHTML;
+    const token = document.getElementById("token").innerHTML;
 
     axios
       .get(
-        `http://localhost:4000/create-report?reportTitle=${reportTitle}&reportName=${reportText}&`
-        // `https://vast-tor-77687.herokuapp.com/create-report?reportTitle=${reportTitle}&reportName=${reportName}&`
+        `https://vast-tor-77687.herokuapp.com/create-report?imageUrl${imageUrl}&token${token}&reportTitle=${reportTitle}&reportName=${reportText}&`
       )
       .then(function (response) {
         setSubmitState(true);
@@ -34,6 +36,9 @@ function CreateReport() {
             <br />
             <input type="text" name="reportTitle" placeholder="Title" />
             <br />
+            <br />
+            <UploadImage />
+            {/* <br /> */}
             Issue
             <br />
             <textarea

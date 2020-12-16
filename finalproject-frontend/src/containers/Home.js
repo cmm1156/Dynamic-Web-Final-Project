@@ -14,8 +14,8 @@ function Home() {
   // this is retreiving data from my localhost:4000 or Heroku
   useEffect(() => {
     axios
-      // .get(`https://vast-tor-77687.herokuapp.com/all-posts`) // use herokuapp.com/theroute to specify where the data is coming from
-      .get(`http://localhost:4000/all-posts`) // in Excerise-Two, this line contained .get(`https://openweather.com/data/? ...`),
+      .get(`https://vast-tor-77687.herokuapp.com/all-posts`) // use herokuapp.com/theroute to specify where the data is coming from
+      // in Excerise-Two, this line contained .get(`https://openweather.com/data/? ...`),
       /*instead of this the openweather API url, we are using our localhost:4000 ( the backend )
       We are using our backend as an API
       How this works:

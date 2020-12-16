@@ -57,10 +57,8 @@ function App() {
   useEffect(() => {
     // .onAuthStateChanged(callback) Adds an observer for changes to the user's sign-in state
     firebase.auth().onAuthStateChanged(function (user) {
-      // console.log({ user });
       if (user) {
         // User is logged in
-        console.log(user);
         setUserAuthInfo(user); // user is type object // is an filled object {}
         setLoggedIn(true);
       } else {

@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 const firebase = require("firebase");
 // Firebase Config
 const firebaseConfig = {
-  apiKey: "AIzaSyD3kjvaLwzr41hA7YU-yht1gQDiIwMdacA", //process.env.FIREBASE_APIKEY,
+  apiKey: process.env.FIREBASE_APIKEY,
   authDomain: "final-project-2-55bab.firebaseapp.com",
   databaseURL: "https://final-project-2-55bab-default-rtdb.firebaseio.com",
   projectId: "final-project-2-55bab",
