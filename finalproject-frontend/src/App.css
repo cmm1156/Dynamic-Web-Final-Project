@@ -181,10 +181,20 @@
   text-decoration: underline;
 }
 
+.NewReport {
+  color: rgb(172, 2, 2);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.NewReport:hover {
+  color: red;
+}
+
 .PostCard {
   display: flex;
   flex-direction: column;
-  border: solid 2px grey;
+  border-top: solid 4px grey;
+  border-bottom: solid 4px grey;
   margin: 15px;
   padding: 15px;
 }

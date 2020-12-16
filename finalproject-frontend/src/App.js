@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/storage";
+
+// const storage = firebase.storage();
+// export { storage, firbase as default };
 
 // Styles
 import "./App.css";
@@ -24,7 +28,7 @@ import Header from "./components/Header";
 
 // My Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD3kjvaLwzr41hA7YU-yht1gQDiIwMdacA",
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "final-project-2-55bab.firebaseapp.com",
   databaseURL: "https://final-project-2-55bab-default-rtdb.firebaseio.com",
   projectId: "final-project-2-55bab",
@@ -32,15 +36,6 @@ const firebaseConfig = {
   messagingSenderId: "396105694122",
   appId: "1:396105694122:web:d32bbc171f1816841c89d3",
 };
-// const firebaseConfig = {
-//   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
-//   authDomain: "final-project-25657.firebaseapp.com",
-//   databaseURL: "https://final-project-25657-default-rtdb.firebaseio.com",
-//   projectId: "final-project-25657",
-//   storageBucket: "final-project-25657.appspot.com",
-//   messagingSenderId: "836470554574",
-//   appId: "1:836470554574:web:a79dca759c75194f9bf59f",
-// };
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true); // set to logged out by default

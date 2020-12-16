@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import UploadImage from "../components/UploadImage";
 
 function CreatePost({ userAuthInfo }) {
   const history = useHistory();
-  // const [postId, setPostId] = useState("");
-
-  // let [newId, setNewId] = useState(0);
 
   // THIS FUNCTION WILL ADD DATA TO Firestore
   function submitPost(e) {
@@ -16,7 +14,12 @@ function CreatePost({ userAuthInfo }) {
     const postName = e.currentTarget.postName.value;
     const postAuthor = e.currentTarget.postAuthor.value; // these keys must be same as Firestore
     const postAuthorId = userAuthInfo.uid; // current user logged in
-    const image = e.currentTarget.image.value;
+
+    const imageUrl = document.getElementById("imageUrl").innerHTML;
+    console.log(imageUrl);
+    const token = document.getElementById("token").innerHTML;
+    console.log(token);
+
     const location = e.currentTarget.location.value;
     const numMiles = e.currentTarget.numMiles.value;
     const maxAlt = e.currentTarget.maxAlt.value;
@@ -26,8 +29,8 @@ function CreatePost({ userAuthInfo }) {
     // create request to the backend
     axios
       .get(
-        `http://localhost:4000/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${image}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
-        // `https://vast-tor-77687.herokuapp.com/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${image}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
+        `http://localhost:4000/create?imageUrl=${imageUrl}&token=${token}&postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
+        // `https://vast-tor-77687.herokuapp.com/create?postName=${postName}&postAuthor=${postAuthor}&postAuthorId=${postAuthorId}&image=${theImage}&location=${location}&numMiles=${numMiles}&maxAlt=${maxAlt}&review=${review}&`
       )
       .then(function (response) {
         history.push("/");
@@ -36,6 +39,19 @@ function CreatePost({ userAuthInfo }) {
         console.warn("ERROR_CREATE_POST:", error);
       });
   }
+
+  // function uploadFile(e) {
+  //   e.preventDefault();
+
+  //   const theImage = e.currentTarget.image.value;
+
+  //   const storageRef = firebase.storage().ref();
+  //   const trailRef = storageRef.child(`${theImage}`);
+  //   const trailImagesRef = storageRef.child(`images/${theImage}`);
+
+  //   trailRef.name === trailImagesRef.name;
+  //   trailRef.fullPath === trailImagesRef.fullPath;
+  // }
 
   // similar to exercise-four createBlogpost.js
   // this will post to the server
@@ -47,7 +63,7 @@ function CreatePost({ userAuthInfo }) {
       <h1>Create Post</h1>
       <form onSubmit={(e) => submitPost(e)}>
         <label className="CreateName">
-          Post Name
+          Trail Name
           <input type="text" name="postName" placeholder="Title" />
         </label>
         <br />
@@ -64,7 +80,8 @@ function CreatePost({ userAuthInfo }) {
             name="image"
             placeholder="image"
           /> */}
-          <input type="text" name="image" placeholder="imageUrl" />
+          <UploadImage />
+          {/* <input type="text" name="image" placeholder="imageUrl" /> */}
         </label>
         <label className="CreateTrailInfo">
           Trail info

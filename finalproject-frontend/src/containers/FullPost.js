@@ -27,7 +27,7 @@ function FullPost({ userAuthInfo }) {
   return (
     <div className="FullPost">
       <div className="FullPostInfo">
-        <img src={userPostData.image} alt="trailImage" />
+        <img src={userPostData.imageUrl} alt="trailImage" />
 
         <div>
           <h1>{userPostData.postName}</h1>

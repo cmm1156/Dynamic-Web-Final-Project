@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 const firebase = require("firebase");
 // Firebase Config
 const firebaseConfig = {
-  apiKey: "AIzaSyD3kjvaLwzr41hA7YU-yht1gQDiIwMdacA",
+  apiKey: "AIzaSyD3kjvaLwzr41hA7YU-yht1gQDiIwMdacA", //process.env.FIREBASE_APIKEY,
   authDomain: "final-project-2-55bab.firebaseapp.com",
   databaseURL: "https://final-project-2-55bab-default-rtdb.firebaseio.com",
   projectId: "final-project-2-55bab",
@@ -21,15 +21,7 @@ const firebaseConfig = {
   messagingSenderId: "396105694122",
   appId: "1:396105694122:web:d32bbc171f1816841c89d3",
 };
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBdoSE1QMJYJ7zxF-j_5DcOYUr0Fsy9NA8", //process.env.FIREBASE_APIKEY,
-//   authDomain: "final-project-25657.firebaseapp.com",
-//   databaseURL: "https://final-project-25657-default-rtdb.firebaseio.com",
-//   projectId: "final-project-25657",
-//   storageBucket: "final-project-25657.appspot.com",
-//   messagingSenderId: "836470554574",
-//   appId: "1:836470554574:web:a79dca759c75194f9bf59f",
-// };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

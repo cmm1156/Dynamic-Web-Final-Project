@@ -21,10 +21,8 @@ function CreateReport() {
         console.warn("ERROR_CREATE_REPORT:", error);
       });
 
-    alert("Report Submitted");
+    alert("Report Submitted. Thank you");
   }
-
-  console.log(submitState);
 
   if (submitState === false || submitState === null) {
     return (
@@ -53,7 +51,15 @@ function CreateReport() {
     return (
       <div className="CreateReportInfo">
         <h1>Thank you</h1>
-        {/* <a onClick={setSubmitState(false)}>Submit Another Report</a> */}
+        <a
+          className="NewReport"
+          onClick={(e) => {
+            e.preventDefault();
+            setSubmitState(false);
+          }}
+        >
+          Submit Another Report
+        </a>
       </div>
     );
   }

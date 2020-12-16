@@ -38,14 +38,6 @@ function Home() {
         {myAPIData.map((item, i) => (
           <PostCard postData={item} key={i} />
         ))}
-        {/* {recipeAPIData.map((recipe, i) => (
-          <RecipeCard recipeData={recipe} key={i} />
-          <div key={i}>
-            <p>Name: {item.trailName}</p>
-            <p>Role: {item.trailLocation}</p>
-            <p>Dog: {item.maxAlt}</p>
-          </div>
-        ))} */}
       </div>
     </>
   );
